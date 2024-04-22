@@ -36,22 +36,18 @@ class _MyHomePageState extends State<MyHomePage> {
       drawer: drawer(context),
       body: IndexedStack(
         index: _tabIndex,
-        children: [
+        children: const [
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                const Text(
-                  "How many book's you have read today:",
-                ),
                 Text(
-                  '$_counter',
-                  style: Theme.of(context).textTheme.titleLarge,
+                  "Read list is empty",
                 ),
               ],
             ),
           ),
-          const Profile(), // Display Profile page at index 1
+          Profile(), // Display Profile page at index 1
         ],
       ),
       floatingActionButton: FAB(),
@@ -81,7 +77,24 @@ class _MyHomePageState extends State<MyHomePage> {
 
   FloatingActionButton FAB() {
     return FloatingActionButton(
-      onPressed: _incrementCounter,
+      onPressed: () {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Add Book'),
+                content: Text('Add your Read list'),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('Close'),
+                  ),
+                ],
+              );
+            });
+      },
       tooltip: 'Increment',
       child: const Icon(Icons.add),
     );
@@ -96,9 +109,8 @@ class _MyHomePageState extends State<MyHomePage> {
             leading: const Icon(Icons.verified_user),
             title: const Text('Profile'),
             onTap: () {
-              Navigator.of(context).pop(); // Close drawer
-              changeTabIndex(
-                  1); // Change tab index to navigate to the profile page
+              Navigator.of(context).pop();
+              changeTabIndex(1);
             },
           ),
           ListTile(

@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ui/profile/profile_view.dart';
 
 class Profile extends StatelessWidget {
-  const Profile({super.key});
+  const Profile({Key? key}) : super(key: key);
 
+  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text('Profile'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('Profile'),
+            OutlinedButton(
+              onPressed: () {},
+              child: const Text('Buku'),
+            ),
+          ],
+        ),
       ),
     );
   }
