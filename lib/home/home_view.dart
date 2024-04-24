@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ui/add/add_list.dart';
+import 'package:flutter_ui/detail/detail_view.dart';
 import 'package:flutter_ui/profile/profile_view.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -87,7 +89,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 actions: <Widget>[
                   TextButton(
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AddListView()),
+                      );
                     },
                     child: Text('Close'),
                   ),
