@@ -15,6 +15,7 @@ class _AddListViewState extends State<AddListView> {
   // late Offset _position;
   double postY = 0.0;
   double postX = 0.0;
+  bool _isHovered = false;
 
   @override
   void initState() {
@@ -68,21 +69,52 @@ class _AddListViewState extends State<AddListView> {
         onTap: () {
           handleChange();
         },
-        child: AnimatedContainer(
-          width: 200,
-          height: 200,
-          margin: EdgeInsets.all(margin),
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(borderRadius),
-          ),
-          duration: Duration(milliseconds: 2000),
-          curve: Curves.bounceOut,
-          child: Column(
-            children: [
-              // Center(child: Text('waduh', style: TextStyle(color: Colors.white))),
-              // ElevatedButton(onPressed: () => handleChange(), child: Text('ubah'))
-            ],
+        child: MouseRegion(
+          onEnter: (_) => setState(() => _isHovered = true),
+          onExit: (_) => setState(() => _isHovered = false),
+          child: AnimatedContainer(
+            width: _isHovered ? 220 : 200,
+            height: _isHovered ? 220 : 200,
+            margin: EdgeInsets.all(margin),
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.circular(borderRadius),
+            ),
+            duration: Duration(milliseconds: 500),
+            curve: Curves.easeInCubic,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _isHovered
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                          "https://images.unsplash.com/photo-1716383425862-cdf9b2d5949a?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                          height: 150,
+                          width: 150,
+                          fit: BoxFit.cover,
+                        ),
+                      )
+                    : ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                          "https://images.unsplash.com/photo-1716383425870-af3dc8f49ea2?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                          height: 150,
+                          width: 150,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                _isHovered
+                    ? Text(
+                        "Mantap Cuy",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      )
+                    : Text(
+                        "Lieur",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      )
+              ],
+            ),
           ),
         ),
       ),
